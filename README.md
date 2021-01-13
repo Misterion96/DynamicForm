@@ -119,7 +119,7 @@ export class AppComponent implements OnInit {
 ```
 4) Done, the form will be automatically created on the page
 
-![alt text](src/assets/example-form.png)
+![alt text](https://raw.githubusercontent.com/Misterion96/DynamicForm/master/src/assets/example-form.png)
 ## Use DynamicFormBuilder
 by analogy with the native FormBuilder, there is a DynamicFormBuilder. It works the same way as the native Builder, except that it has a`"type"` parameter when creating a FormControl instance
 ```typescript
@@ -192,11 +192,11 @@ The context passed to <ng-template> has the following structure
     </ng-template>
 </dynamic-form>
 ```
-![alt text](./src/assets/custom-checkbox.png)
+![alt text](https://raw.githubusercontent.com/Misterion96/DynamicForm/master/src/assets/custom-checkbox.png)
 ##### If you want to use 1 template for several FormControls, it is enough to specify the replaced template types in the questTemplate array separated by commas
 ```angular2html
     <ng-template [questTemplate]="['text', 'color', 'number', 'dropdown']" let-formcontrol>
         <span style="font-size: 20px; color: green">My custom template for {{formcontrol.controlType}}</span>
     </ng-template>
 ```
-![alt text](./src/assets/custom-templates.png)
+![alt text](https://raw.githubusercontent.com/Misterion96/DynamicForm/master/src/assets/custom-templates.png)
