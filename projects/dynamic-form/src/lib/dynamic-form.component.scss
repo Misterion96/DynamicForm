@@ -1,0 +1,93 @@
+h1 {
+  color: blue;
+}
+.dynamic-form {
+  font-family: sans-serif;
+  .form {
+    &-submit {
+      margin: 10px 0;
+      background-color: transparent;
+      padding: 3px 13px;
+      border: 1px solid #8d8d8d;
+      display: inline-block;
+      font-weight: 400;
+      color: #212529;
+      text-align: center;
+      vertical-align: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    &-group {
+      width: 25%;
+      min-width: 270px;
+      max-width: 600px;
+      padding: 10px;
+      margin: 10px auto;
+      input, select {
+        border: 1px solid #d8d8d8;
+        border-radius: 2px;
+      }
+      select {
+        display: block;
+        width: 100%;
+        padding: 4px;
+      }
+    }
+
+    &-control {
+      &-color {
+        margin: 5px 0;
+        padding: 5px;
+        display: flex;
+        align-items: center;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+
+        input {
+          border: none;
+          width: 25px;
+          height: 25px;
+          background-color: transparent;
+          appearance: none;
+          margin-right: 10px;
+        }
+      }
+
+      &-checkbox {
+        margin: 5px 0;
+        padding: 5px;
+        display: flex;
+        align-items: center;
+
+        input {
+          margin-right: 10px;
+          width: 23px;
+          height: 18px;
+        }
+      }
+
+      &-text, &-number {
+        input {
+          width: 91%;
+          display: block;
+          padding: 3px 10px;
+        }
+      }
+
+      &-invalid {
+        outline: red solid 1px;
+        background-color: rgba(239, 166, 166, 0.51);
+        border: none;
+      }
+    }
+  }
+  button[disabled] {
+    opacity: 0.5;
+    color: grey
+  }
+}
+
+

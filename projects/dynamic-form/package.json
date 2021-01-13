@@ -1,0 +1,30 @@
+{
+  "name": "es-dynamic-form",
+  "version": "0.0.10",
+  "description": "Module for creating dynamic FormControls based on FormGroup",
+  "author": "Max Dolgikh",
+  "peerDependencies": {
+    "@angular/common": "^9.1.13 || ^9.0.0",
+    "@angular/core": "^9.1.13 || ^9.0.0"
+  },
+  "dependencies": {
+    "tslib": "^1.10.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Misterion96/DynamicForm.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Misterion96/DynamicForm/issues"
+  },
+  "keywords": [
+    "angular",
+    "angular 9",
+    "custom form",
+    "dynamic form",
+    "reactive form",
+    "typescript",
+    "javascript"
+  ],
+  "license": "MIT"
+}

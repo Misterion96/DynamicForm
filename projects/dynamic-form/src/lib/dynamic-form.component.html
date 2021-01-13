@@ -1,0 +1,84 @@
+<form *ngIf="formGroupList; else emptyGroup"
+      [formGroup]="formGroupList"
+      [ngClass]="styleClass"
+      (ngSubmit)="submit()">
+  <div class="form-group">
+    <ng-container *ngFor="let control of formGroupList.controls | keyvalue"
+                  [ngTemplateOutlet]="group"
+                  [ngTemplateOutletContext]="{ name: control.key, control: control.value, fg: formGroupList}"
+    ></ng-container>
+    <button *ngIf="submitButton" class="form-submit" type="submit"
+            [disabled]="formGroupList.invalid">
+      <span>{{submitName}}</span>
+    </button>
+  </div>
+</form>
+<ng-container *ngIf="debug">
+  <pre>{{formGroupList.value | json}}
+    {{formGroupList.invalid | json}}
+  </pre>
+</ng-container>
+<ng-template #group let-name="name" let-control='control' let-formGroup="fg">
+  <div [formGroup]="formGroup" [ngSwitch]="getTypeForm(control)">
+    <ng-container *ngSwitchCase="'FormGroup'">
+      <ng-container
+        *ngFor="let c of control.controls | keyvalue"
+        [ngTemplateOutlet]="group"
+        [ngTemplateOutletContext]="{ name: c.key, control: c.value, fg: control}"
+      ></ng-container>
+    </ng-container>
+    <ng-container *ngSwitchCase="'FormArray'">
+      <div [formArrayName]="name">
+        <ng-container *ngFor="let c of control.controls"
+                      [ngTemplateOutlet]="controlTemplate"
+                      [ngTemplateOutletContext]="{fg: control, question: c}"
+        >
+        </ng-container>
+      </div>
+    </ng-container>
+    <ng-container *ngSwitchCase="'FormControl'"
+                  [ngTemplateOutlet]="controlTemplate"
+                  [ngTemplateOutletContext]="{fg: formGroup, question: control}"
+    >
+    </ng-container>
+    <ng-container *ngSwitchDefault [ngTemplateOutlet]="emptyGroup"></ng-container>
+  </div>
+</ng-template>
+
+<ng-template #controlTemplate let-fg="fg" let-question="question">
+  <div *ngIf="templateList[question.controlType]; else errorTemplate">
+    <ng-container [ngTemplateOutlet]="templateList[question.controlType]"
+                  [ngTemplateOutletContext]="{$implicit: question, fg: fg}"
+    >
+    </ng-container>
+  </div>
+  <ng-template #errorTemplate>
+    <p style="color: red">Шаблона для {{question.controlType}} не существует</p>
+  </ng-template>
+</ng-template>
+
+<ng-template [questTemplate]="['text', 'color']" let-question let-fg="fg">
+  <dynamic-form-text [fg]="fg" [question]="question"
+                     (onChangeForm)="onChangeForm.emit($event)">
+  </dynamic-form-text>
+</ng-template>
+<ng-template [questTemplate]="['checkbox']" let-question let-fg="fg">
+  <dynamic-form-checkbox [fg]="fg" [question]="question"
+                         (onChangeForm)="onChangeForm.emit($event)">
+  </dynamic-form-checkbox>
+</ng-template>
+
+<ng-template [questTemplate]="['number']" let-question let-fg="fg">
+  <dynamic-form-number [fg]="fg" [question]="question"
+                       (onChangeForm)="onChangeForm.emit($event)">
+  </dynamic-form-number>
+</ng-template>
+
+<ng-template [questTemplate]="['dropdown']" let-question let-fg="fg">
+  <dynamic-form-select [fg]="fg" [question]="question"
+                       (onChangeForm)="onChangeForm.emit($event)">
+  </dynamic-form-select>
+</ng-template>
+<ng-template #emptyGroup>
+  <p style="color: red">настройки не заданы или отсутствуют</p>
+</ng-template>
