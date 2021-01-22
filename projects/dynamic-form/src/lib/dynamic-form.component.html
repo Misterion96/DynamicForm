@@ -73,6 +73,11 @@
                        (onChangeForm)="onChangeForm.emit($event)">
   </dynamic-form-number>
 </ng-template>
+<ng-template [questTemplate]="['range']" let-question let-fg="fg">
+  <dynamic-form-range [fg]="fg" [question]="question"
+                       (onChangeForm)="onChangeForm.emit($event)">
+  </dynamic-form-range>
+</ng-template>
 
 <ng-template [questTemplate]="['dropdown']" let-question let-fg="fg">
   <dynamic-form-select [fg]="fg" [question]="question"

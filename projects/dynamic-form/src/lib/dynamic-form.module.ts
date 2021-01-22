@@ -10,6 +10,7 @@ import {InputCheckboxComponent} from './components/input-checkbox/input-checkbox
 import {SelectComponent} from './components/select/select.component';
 import {ErrorMessageComponent} from './components/error-message/error-message.component';
 import {DynamicFormBuilder} from './classes/dynamic-form.classes';
+import { InputRangeComponent } from './components/input-range/input-range.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import {DynamicFormBuilder} from './classes/dynamic-form.classes';
     InputTextComponent,
     InputCheckboxComponent,
     SelectComponent,
+    InputRangeComponent,
     ErrorMessageComponent
   ],
   imports: [

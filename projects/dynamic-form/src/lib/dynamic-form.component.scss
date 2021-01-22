@@ -76,6 +76,33 @@ h1 {
           padding: 3px 10px;
         }
       }
+      &-range {
+        &-label {
+          display: block;
+          margin: 10px 0 5px 0;
+        }
+        &-value {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          justify-content: center;
+          input {
+            width: 60%;
+            margin: 0 10px;
+            display: inline-block;
+            padding: 3px 0;
+          }
+        }
+        &-minValue {
+          display: inline-block;
+          min-width: 16px;
+        }
+        &-maxValue {
+          display: inline-block;
+          min-width: 16px;
+        }
+
+      }
 
       &-invalid {
         outline: red solid 1px;

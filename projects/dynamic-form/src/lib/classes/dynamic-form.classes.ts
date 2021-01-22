@@ -137,6 +137,29 @@ export class FormColor extends Question {
     super(formState, validatorOrOpts, asyncValidator);
   }
 }
+export class FormRange extends Question {
+  public readonly controlType = 'range'
+  constructor(
+    formState: IFormStateControl<number, {
+      min: number,
+      max: number,
+      showValue?: boolean
+    }> = {
+      value: 0,
+      key: 'range',
+      label: 'range',
+      disabled: false,
+      options: {
+        max: 100,
+        min: 0
+      }
+    },
+    validatorOrOpts?: ValidatorFn | AbstractControlOptions | ValidatorFn[],
+    asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[],
+  ) {
+    super(formState, validatorOrOpts, asyncValidator);
+  }
+}
 @Injectable()
 export class DynamicFormBuilder {
   private readonly controlFactory = new FormControlFactory();
@@ -270,7 +293,8 @@ class FormControlFactory {
     color: FormColor,
     dropdown: FormDropDown,
     number: FormNumber,
-    text: FormText
+    text: FormText,
+    range: FormRange
   };
 
   public create(formsState: IFormStateControl<any, any>,

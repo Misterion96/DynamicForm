@@ -10,7 +10,6 @@ import {IFormChangeEvent} from '../../interfaces/dynamic-form.interface';
       <input type="checkbox"
              [id]="question.id"
              [formControlName]="question.key"
-             [attr.required]="question.required"
              (change)="onChangeForm.emit({type: question.controlType, key: question.key, value: question.value})"
       >
       {{question.label}}

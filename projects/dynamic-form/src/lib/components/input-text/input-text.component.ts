@@ -11,7 +11,6 @@ import {IFormChangeEvent} from '../../interfaces/dynamic-form.interface';
             <input [type]="question.controlType"
                    [id]="question.id"
                    [formControlName]="question.key"
-                   [attr.required]="question.required"
                    [ngClass]="question.errors ? 'form-control-invalid' : ''"
                    (change)="onChangeForm.emit({type: question.controlType, key: question.key, value: question.value})"
             >

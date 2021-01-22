@@ -1,6 +1,6 @@
 {
   "name": "es-dynamic-form",
-  "version": "0.0.10",
+  "version": "0.0.12",
   "description": "Module for creating dynamic FormControls based on FormGroup",
   "author": "Max Dolgikh",
   "peerDependencies": {

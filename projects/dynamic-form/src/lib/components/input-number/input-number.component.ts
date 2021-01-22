@@ -10,7 +10,6 @@ import {IFormChangeEvent} from '../../interfaces/dynamic-form.interface';
             <input type="number"
                    [id]="question.id"
                    [formControlName]="question.key"
-                   [attr.required]="question.required"
                    [ngClass]="question.errors ? 'form-control-invalid' : ''"
                    (change)="onChangeForm.emit({type: question.controlType, key: question.key, value: question.value})"
             >
@@ -30,5 +29,4 @@ export class InputNumberComponent implements OnInit {
 
     ngOnInit(): void {
     }
-
 }

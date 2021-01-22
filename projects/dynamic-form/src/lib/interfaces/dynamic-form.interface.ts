@@ -1,4 +1,4 @@
-export type TDynamicFormTemplate = 'checkbox' | 'number' | 'text' | 'dropdown' | 'color'
+export type TDynamicFormTemplate = 'checkbox' | 'number' | 'text' | 'dropdown' | 'color' | 'range'
 export interface IFormChangeEvent {
     type: string;
     key: string | number;
