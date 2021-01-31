@@ -15,15 +15,14 @@
       </ng-template>
     </ng-container>
 
-    <button *ngIf="submitButton" class="form-submit" type="submit"
-            [disabled]="formGroupList.invalid">
+    <button *ngIf="submitButton" class="form-submit" type="submit" [disabled]="formGroup.invalid">
       <span>{{submitName}}</span>
     </button>
   </div>
 
   <ng-container *ngIf="debug">
-    <pre>{{formGroupList.value | json}}
-      {{formGroupList.invalid | json}}
+    <pre>{{formGroup.value | json}}
+      {{formGroup.invalid | json}}
     </pre>
   </ng-container>
 </form>
