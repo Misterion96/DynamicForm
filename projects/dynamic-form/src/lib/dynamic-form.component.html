@@ -1,12 +1,10 @@
 <form
-  [formGroup]="formGroupList"
+  [formGroup]="formGroup"
   [ngClass]="styleClass"
   (ngSubmit)="submit()">
-  <div class="form-group" *ngIf="list; else emptyGroup">
-    <ng-container *ngFor="let question of list">
-      <div
-
-        *ngIf="templateList[question.controlType]; else errorTemplate">
+  <div class="form-group" *ngIf="controlsList; else emptyGroup">
+    <ng-container *ngFor="let question of controlsList">
+      <div *ngIf="templateList[question.controlType]; else errorTemplate">
         <ng-container [ngTemplateOutlet]="templateList[question.controlType]"
                       [ngTemplateOutletContext]="{$implicit: question, fg: question.parent}"
         >

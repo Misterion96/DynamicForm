@@ -1,3 +1,6 @@
+import {TemplateRef} from '@angular/core';
+import {DynamicFormTemplateDirective} from '../shared/dynamic-form-template.directive';
+
 export type TDynamicFormTemplate = 'checkbox' | 'number' | 'text' | 'dropdown' | 'color' | 'range'
 export interface IFormChangeEvent {
     type: string;
@@ -21,3 +24,4 @@ export interface ISelectItem {
     title?: string;
     disabled?: boolean;
 }
+export type TTemplateList = { [p: string]: TemplateRef<DynamicFormTemplateDirective> }
