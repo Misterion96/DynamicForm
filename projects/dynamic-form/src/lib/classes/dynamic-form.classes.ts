@@ -5,6 +5,7 @@ import {Injectable} from '@angular/core';
 export abstract class Question extends FormControl {
   public required = false;
   public controlType;
+  public order: number
   public key: string | number = '';
   public label: string | number = '';
   public options;
@@ -18,7 +19,7 @@ export abstract class Question extends FormControl {
 
     this.applySettings(formState);
     this.updateEnable(formState.disabled);
-
+    this.order = formState.order ?? 0;
     this.options = formState.options;
     this.required = !!validatorOrOpts && !!asyncValidator;
   }
@@ -55,6 +56,7 @@ export class FormCheckBox extends Question {
       key: 'checkbox',
       label: 'checkbox',
       disabled: false,
+      order: 1
     },
     validatorOrOpts?: ValidatorFn | AbstractControlOptions | ValidatorFn[],
     asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[],
@@ -73,6 +75,7 @@ export class FormText extends Question {
       key: 'text',
       label: 'text',
       disabled: false,
+      order: 1
     },
     validatorOrOpts?: ValidatorFn | AbstractControlOptions | ValidatorFn[],
     asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[],
@@ -91,6 +94,7 @@ export class FormNumber extends Question {
       key: 'number',
       label: 'number',
       disabled: false,
+      order: 1
     },
     validatorOrOpts?: ValidatorFn | AbstractControlOptions | ValidatorFn[],
     asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[],
@@ -109,6 +113,7 @@ export class FormDropDown extends Question {
       key: 'dropdown',
       label: 'dropdown',
       disabled: false,
+      order: 1,
       options: {
         items: []
       }
@@ -130,6 +135,7 @@ export class FormColor extends Question {
       key: 'color',
       label: 'color',
       disabled: false,
+      order: 1
     },
     validatorOrOpts?: ValidatorFn | AbstractControlOptions | ValidatorFn[],
     asyncValidator?: AsyncValidatorFn | AsyncValidatorFn[],
@@ -149,6 +155,7 @@ export class FormRange extends Question {
       key: 'range',
       label: 'range',
       disabled: false,
+      order: 1,
       options: {
         max: 100,
         min: 0
@@ -224,7 +231,7 @@ export class DynamicFormBuilder {
    */
 
   public group(
-    controlsConfig: { [key: string]: any },
+    controlsConfig: { [key: string]: FormArray | [IFormStateControl<unknown, unknown>, string, any] },
     options: AbstractControlOptions | { [key: string]: any } | null = null): FormGroup {
     const controls = this._reduceControls(controlsConfig);
 

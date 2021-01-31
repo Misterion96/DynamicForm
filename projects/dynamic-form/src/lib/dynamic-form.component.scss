@@ -70,6 +70,8 @@ h1 {
       }
 
       &-text, &-number {
+        display: block;
+        margin: 10px 0 5px 0;
         input {
           width: 91%;
           display: block;

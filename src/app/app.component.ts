@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {DynamicFormBuilder} from 'es-dynamic-form';
-import {Validators} from '@angular/forms';
+import {DynamicFormBuilder, FormCheckBox, FormColor, FormDropDown, FormNumber, FormText} from 'es-dynamic-form';
+import {FormRange} from '../../projects/dynamic-form/src/lib/classes/dynamic-form.classes';
+import {FormArray, FormGroup} from '@angular/forms';
+
 
 @Component({
   selector: 'app-root',
@@ -17,19 +19,23 @@ export class AppComponent implements OnInit {
     {label: 'Fiat', value: 'Fiat'},
   ];
   title = 'es-dynamic-form';
-  fg = this.fb.group({
-    checkbox: [{value: true, key: 'checkbox', label: 'my checkbox'}, 'checkbox'],
-    text: [{value: 'simple text', key: 'text', label: 'insert text'}, 'text'],
-    drop: [{
-      value: this.cars[0].value, key: 'drop', label: 'cars list',
-      options: {items: this.cars}
-    }, 'dropdown'],
-    arrayNumber: this.fb.array([
-      [{value: -1, key: 0, label: 'number 1'}, 'number', Validators.min(0)],
-      [{value: 2, key: 1, label: 'number 2'}, 'number', Validators.min(0)],
-      [{value: 3, key: 2, label: 'number 3'}, 'number', Validators.min(0)],
+  fg = new FormGroup({
+    checkbox: new FormCheckBox({value: true, key: 'checkbox', label: 'my checkbox', order: 2}),
+    text: new FormText({value: 'simple text', key: 'text', label: 'insert text'}),
+    drop: new FormDropDown({
+      value: this.cars[0].value, key: 'drop', label: 'cars list', order: 10,
+      options: {items: this.cars},
+    }),
+    arrayNumber: new FormArray([
+      new FormNumber({value: -1, key: 0, label: 'number 1'}),
+      new FormNumber({value: 2, key: 1, label: 'number 2'}),
+      new FormNumber({value: 3, key: 2, label: 'number 3'}),
     ]),
-    color: [{value: '#fff222', key: 'color', label: 'colorpicker', disabled: false}, 'color'],
+    color: new FormColor({value: '#fff222', key: 'color', label: 'colorpicker', disabled: false, order: 1}),
+    range: new FormRange({
+      value: 10, key: 'range', label: 'my range', order: 10,
+      options: {min: 0, max: 100, showValue: true}
+    })
   });
 
   ngOnInit(): void {

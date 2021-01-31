@@ -13,10 +13,11 @@ import {
     ViewChildren,
     ViewEncapsulation
 } from '@angular/core';
-import {AbstractControl, FormGroup} from '@angular/forms';
+import {AbstractControl, FormArray, FormControl, FormGroup} from '@angular/forms';
 import {DynamicFormTemplateDirective} from './shared/dynamic-form-template.directive';
 import {IFormChangeEvent} from './interfaces/dynamic-form.interface';
 import {DynamicFormService} from './shared/dynamic-form.service';
+import { Question } from './classes/dynamic-form.classes';
 
 @Component({
     selector: 'dynamic-form',
@@ -26,30 +27,35 @@ import {DynamicFormService} from './shared/dynamic-form.service';
     encapsulation: ViewEncapsulation.None
 })
 export class DynamicFormComponent implements OnInit, AfterViewInit {
-
+    public formGroupList
+    public list: Question[] = []
     @Input()
     public submitButton = true;
-    @Input()
-    public formGroupList: FormGroup;
     @Input()
     public styleClass = 'dynamic-form';
     @Input()
     public submitName = 'Submit';
     @Input()
     public debug = false;
-
     @Output()
     readonly onSubmitForm: EventEmitter<FormGroup['value']> = new EventEmitter<FormGroup['value']>();
     @Output()
     readonly onChangeForm: EventEmitter<IFormChangeEvent> = new EventEmitter<IFormChangeEvent>();
-
     public templateList: { [p: string]: TemplateRef<DynamicFormTemplateDirective> } = {};
-
     @ContentChildren(DynamicFormTemplateDirective)
     protected templates: QueryList<DynamicFormTemplateDirective>;
-
     @ViewChildren(DynamicFormTemplateDirective)
     protected defaultsTemplates: QueryList<DynamicFormTemplateDirective>;
+
+    constructor(private cdr: ChangeDetectorRef, private dynamicFormService: DynamicFormService) {
+    }
+
+    @Input() set FormGroupList(v: FormGroup){
+      if(v){
+        this.formGroupList = v
+        this.pushControl(v)
+      }
+    };
 
     ngOnInit(): void {
 
@@ -61,16 +67,32 @@ export class DynamicFormComponent implements OnInit, AfterViewInit {
         this.cdr.detectChanges();
     }
 
-    constructor(private cdr: ChangeDetectorRef, private dynamicFormService: DynamicFormService) {
-    }
-
-
     public getTypeForm(control: FormGroup | AbstractControl): string {
         return this.dynamicFormService.getTypeForm(control);
     }
 
     public submit(): void {
         this.onSubmitForm.emit(this.formGroupList.value);
+    }
+
+    private sortControls(v: AbstractControl, array = []){
+      if(v instanceof FormGroup){
+        Object.keys(v.controls).forEach(key => {
+          this.sortControls(v.controls[key], array)
+        })
+      }else if(v instanceof FormArray){
+        v.controls.forEach(control => this.sortControls(control, array))
+
+      }else if(v instanceof FormControl){
+        array.push(v)
+        return
+      }
+    }
+
+    private pushControl(v: FormGroup | FormArray | Question){
+      const array: Question[] = []
+      this.sortControls(v, array)
+      this.list = array.sort((a,b) => a.order - b.order)
     }
 
     private _createTemplateList(): void {

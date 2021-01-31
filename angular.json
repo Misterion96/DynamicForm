@@ -163,6 +163,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "app-dynamic-form"
+    }
+  },
+  "defaultProject": "app-dynamic-form",
+  "cli": {
+    "analytics": "b17042a1-ffc3-446b-a450-4d257fddf502"
+  }
 }

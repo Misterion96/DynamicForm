@@ -8,6 +8,7 @@ export interface IFormStateControl<T, U> {
     value: T,
     key: string | number,
     label: string | number,
+    order?: number,
     disabled?: boolean,
     options?: U
 }
