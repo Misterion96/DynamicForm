@@ -71,15 +71,15 @@ export class DynamicFormComponent implements OnInit, AfterViewInit, AfterContent
     this.onSubmitForm.emit(this.formGroup.value);
   }
 
+  public pushControl(Control, array: DynamicFormArray) {
+    const control = new Control()
+    control.key = array.controls.length
+    array.push(control)
+  }
+
   private createControlList(v: FormGroup | FormArray | Question) {
     const array: Question[] = [];
     this.dynFormService.sortControls(v, array);
     this.controlsList = array.sort((a, b) => a.order - b.order);
-  }
-
-  pushControl(Control, array: DynamicFormArray) {
-    const control = new Control()
-    control.key = array.controls.length
-    array.push(control)
   }
 }

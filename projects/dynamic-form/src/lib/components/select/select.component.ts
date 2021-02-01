@@ -7,7 +7,7 @@ import {FormDropDown} from '../../classes/dynamic-form.classes';
   template: `
     <label [formGroup]="fg" [ngClass]="question.style" [attr.for]="question.id">
     {{question.label}}
-    <select [formControlName]="question.key"
+    <select [formControl]="question"
             [attr.name]="question.key"
             [id]="question.id"
            >

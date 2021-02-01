@@ -1,11 +1,11 @@
 import {Injectable, QueryList} from '@angular/core';
 import {AbstractControl, FormArray, FormControl, FormGroup} from '@angular/forms';
-import { TTemplateList } from '../interfaces/dynamic-form.interface';
+import {TTemplateList} from '../interfaces/dynamic-form.interface';
 import {DynamicFormTemplateDirective} from './dynamic-form-template.directive';
 
 @Injectable()
 export class DynamicFormService {
-  public sortControls(control: AbstractControl, array = []) {
+  public sortControls(control: AbstractControl, array: (FormControl | FormArray)[] = []) {
     if (control instanceof FormGroup) {
       Object.keys(control.controls).forEach(key => {
         this.sortControls(control.controls[key], array);
@@ -15,6 +15,7 @@ export class DynamicFormService {
       return;
     }
   }
+
   public updateTemplateList(
     defaultsTemplates: QueryList<DynamicFormTemplateDirective>,
     templateList: TTemplateList
