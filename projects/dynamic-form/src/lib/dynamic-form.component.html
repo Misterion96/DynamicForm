@@ -2,10 +2,10 @@
   [formGroup]="formGroup"
   [ngClass]="styleClass"
   (ngSubmit)="submit()">
-  <div class="form-group" *ngIf="controlsList && controlsList.length; else emptyGroup">
+  <div class="form-group" *ngIf="controlsList?.length; else emptyGroup">
     <ng-container *ngFor="let question of controlsList">
       <ng-container
-        *ngIf="question && templateList[question.controlType]; else errorTemplate"
+        *ngIf="templateList[question.controlType]; else errorTemplate"
         [ngTemplateOutlet]="templateList[question.controlType]"
         [ngTemplateOutletContext]="{$implicit: question, fg: question.parent}"
       >
@@ -42,19 +42,25 @@
   <dynamic-form-select [fg]="fg" [question]="question"></dynamic-form-select>
 </ng-template>
 <ng-template [questTemplate]="['array']" let-formArray>
-  <span>{{formArray.label}}</span>
-  <button *ngIf="formArray?.options?.canAdd"
-          (click)="pushControl(formArray.options.control, formArray)">
-    Добавить
-  </button>
-  <ng-container *ngFor="let control of formArray['controls']">
-    <ng-container
-      *ngIf="control && templateList[control.controlType]; else errorTemplate"
-      [ngTemplateOutlet]="templateList[control.controlType]"
-      [ngTemplateOutletContext]="{$implicit: control, fg: control.parent}"
-    >
+
+  <div [ngClass]="formArray.style">
+    <div [ngClass]="formArray.style + '-label'">
+      <span>{{formArray.label}}</span>
+      <button *ngIf="formArray?.options?.canAdd"
+              (click)="pushControl(formArray.options.control, formArray)">
+        Добавить
+      </button>
+    </div>
+    <ng-container *ngFor="let control of formArray['controls']">
+      <ng-container
+        *ngIf="control && templateList[control.controlType]; else errorTemplate"
+        [ngTemplateOutlet]="templateList[control.controlType]"
+        [ngTemplateOutletContext]="{$implicit: control, fg: control.parent}"
+      >
+      </ng-container>
     </ng-container>
-  </ng-container>
+  </div>
+
 </ng-template>
 <ng-template #emptyGroup>
   <p style="color: red">настройки не заданы или отсутствуют</p>

@@ -36,7 +36,6 @@ h1 {
         padding: 4px;
       }
     }
-
     &-control {
       &-color {
         margin: 5px 0;
@@ -110,6 +109,15 @@ h1 {
         outline: red solid 1px;
         background-color: rgba(239, 166, 166, 0.51);
         border: none;
+      }
+    }
+    &-array {
+      display:flex;
+      flex-direction: column;
+      margin-top: 10px;
+      &-label {
+        display:flex;
+        justify-content: space-between;
       }
     }
   }

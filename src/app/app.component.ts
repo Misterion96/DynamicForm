@@ -37,6 +37,13 @@ export class AppComponent implements OnInit {
     color: new FormColor({
       value: '#fff222', key: 'color', label: 'colorpicker', disabled: false, order: 1
     }),
+    arrayColor: new DynamicFormArray({
+      key: 'arrayColor', label: 'arrayColor', options: {canAdd: true, control: FormColor}, order: 112, value: [
+        new FormColor({value: '#13b11b', key: 'color', label: 'colorpicker 1', order: 1}),
+        new FormColor({value: '#ff224e', key: 'color', label: 'colorpicker 2', order: 1}),
+        new FormColor({value: '#2259ff', key: 'color', label: 'colorpicker 3', order: 1}),
+      ]
+    }),
     range: new FormRange({
       value: 10, key: 'range', label: 'my range', order: 10,
       options: {min: 0, max: 100, showValue: true}

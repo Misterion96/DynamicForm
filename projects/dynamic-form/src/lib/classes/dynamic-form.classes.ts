@@ -1,6 +1,5 @@
 import {AbstractControlOptions, AsyncValidatorFn, FormControl, ValidatorFn, FormGroup, AbstractControl, FormArray} from '@angular/forms';
-import {ISelectItem, TDynamicFormTemplate, FormHooks, IFormStateControl} from '../interfaces/dynamic-form.interface';
-import {Injectable} from '@angular/core';
+import {ISelectItem, IFormStateControl} from '../interfaces/dynamic-form.interface';
 
 export abstract class Question extends FormControl {
   public required = false;
@@ -83,7 +82,6 @@ export class FormText extends Question {
     super(formState, validatorOrOpts, asyncValidator);
   }
 }
-
 
 export class FormNumber extends Question {
   public readonly controlType = 'number';
@@ -177,7 +175,7 @@ export class DynamicFormArray extends FormArray {
   public order: 1;
   public options: {
     canAdd: false,
-    control: Question
+    control: Function
   };
 
   constructor(
@@ -191,7 +189,7 @@ export class DynamicFormArray extends FormArray {
       order: 1,
       options: {
         canAdd: false,
-        control: Question
+        control: Function
       }
     },
     validatorOrOpts?: ValidatorFn | ValidatorFn[] | AbstractControlOptions | null,
@@ -199,7 +197,14 @@ export class DynamicFormArray extends FormArray {
   ) {
     super(array.value, validatorOrOpts, asyncValidator);
     Object.assign(this, array);
+  }
 
+  get style(): string {
+    return `form-array`;
+  }
+
+  get id(): string {
+    return `${this.controlType}-${this.key}`;
   }
 }
 
