@@ -6,7 +6,8 @@ import {IFormChangeEvent} from '../../interfaces/dynamic-form.interface';
 @Component({
     selector: 'dynamic-form-number',
     template: `
-        <label [formGroup]="fg" [ngClass]="question.style" [attr.for]="question.id">{{question.label}}
+        <label [formGroup]="fg" [ngClass]="question.style" [attr.for]="question.id">
+          <span *ngIf="question.label">{{question.label}}</span>
             <input type="number"
                    [id]="question.id"
                    [formControlName]="question.key"

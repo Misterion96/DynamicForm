@@ -1,7 +1,7 @@
 import {TemplateRef} from '@angular/core';
 import {DynamicFormTemplateDirective} from '../shared/dynamic-form-template.directive';
 
-export type TDynamicFormTemplate = 'checkbox' | 'number' | 'text' | 'dropdown' | 'color' | 'range'
+export type TDynamicFormTemplate = 'checkbox' | 'number' | 'text' | 'dropdown' | 'color' | 'range' | 'array'
 export interface IFormChangeEvent {
     type: string;
     key: string | number;

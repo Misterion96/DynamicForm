@@ -17,7 +17,7 @@ import { FormArray, FormGroup} from '@angular/forms';
 import {DynamicFormTemplateDirective} from './shared/dynamic-form-template.directive';
 import {IFormChangeEvent, TTemplateList} from './interfaces/dynamic-form.interface';
 import {DynamicFormService} from './shared/dynamic-form.service';
-import {Question} from './classes/dynamic-form.classes';
+import {DynamicFormArray, Question} from './classes/dynamic-form.classes';
 
 
 
@@ -76,5 +76,11 @@ export class DynamicFormComponent implements OnInit, AfterViewInit, AfterContent
     const array: Question[] = [];
     this.dynFormService.sortControls(v, array);
     this.controlsList = array.sort((a, b) => a.order - b.order);
+  }
+
+  pushControl(Control, array: DynamicFormArray) {
+    const control = new Control()
+    control.key = array.controls.length
+    array.push(control)
   }
 }

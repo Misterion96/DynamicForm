@@ -10,10 +10,7 @@ export class DynamicFormService {
       Object.keys(control.controls).forEach(key => {
         this.sortControls(control.controls[key], array);
       });
-    } else if (control instanceof FormArray) {
-      control.controls.forEach(control => this.sortControls(control, array));
-
-    } else if (control instanceof FormControl) {
+    } else if (control instanceof FormControl || control instanceof FormArray) {
       array.push(control);
       return;
     }

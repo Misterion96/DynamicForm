@@ -9,7 +9,6 @@ import {InputTextComponent} from './components/input-text/input-text.component';
 import {InputCheckboxComponent} from './components/input-checkbox/input-checkbox.component';
 import {SelectComponent} from './components/select/select.component';
 import {ErrorMessageComponent} from './components/error-message/error-message.component';
-import {DynamicFormBuilder} from './classes/dynamic-form.classes';
 import { InputRangeComponent } from './components/input-range/input-range.component';
 
 @NgModule({
@@ -30,7 +29,6 @@ import { InputRangeComponent } from './components/input-range/input-range.compon
   ],
   providers: [
     DynamicFormService,
-    DynamicFormBuilder
   ],
   exports: [DynamicFormComponent, DynamicFormTemplateDirective]
 })

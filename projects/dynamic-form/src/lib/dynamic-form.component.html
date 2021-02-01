@@ -2,17 +2,14 @@
   [formGroup]="formGroup"
   [ngClass]="styleClass"
   (ngSubmit)="submit()">
-  <div class="form-group" *ngIf="controlsList; else emptyGroup">
+  <div class="form-group" *ngIf="controlsList && controlsList.length; else emptyGroup">
     <ng-container *ngFor="let question of controlsList">
-      <div *ngIf="templateList[question.controlType]; else errorTemplate">
-        <ng-container [ngTemplateOutlet]="templateList[question.controlType]"
-                      [ngTemplateOutletContext]="{$implicit: question, fg: question.parent}"
-        >
-        </ng-container>
-      </div>
-      <ng-template #errorTemplate>
-        <p style="color: red">Шаблона для {{question.controlType}} не существует</p>
-      </ng-template>
+      <ng-container
+        *ngIf="question && templateList[question.controlType]; else errorTemplate"
+        [ngTemplateOutlet]="templateList[question.controlType]"
+        [ngTemplateOutletContext]="{$implicit: question, fg: question.parent}"
+      >
+      </ng-container>
     </ng-container>
 
     <button *ngIf="submitButton" class="form-submit" type="submit" [disabled]="formGroup.invalid">
@@ -54,6 +51,21 @@
                        (onChangeForm)="onChangeForm.emit($event)">
   </dynamic-form-select>
 </ng-template>
+<ng-template [questTemplate]="['array']" let-question>
+  <span>{{question.label}}</span>
+  <button *ngIf="question.options?.canAdd" (click)="pushControl(question.options.control, question)">Добавить</button>
+  <ng-container *ngFor="let control of question['controls']">
+    <ng-container
+      *ngIf="control && templateList[control.controlType]; else errorTemplate"
+      [ngTemplateOutlet]="templateList[control.controlType]"
+      [ngTemplateOutletContext]="{$implicit: control, fg: control.parent}"
+    >
+    </ng-container>
+  </ng-container>
+</ng-template>
 <ng-template #emptyGroup>
   <p style="color: red">настройки не заданы или отсутствуют</p>
+</ng-template>
+<ng-template #errorTemplate>
+    <p style="color: red">Шаблона не существует</p>
 </ng-template>
