@@ -25,36 +25,29 @@
 </form>
 
 <ng-template [questTemplate]="['text', 'color']" let-question let-fg="fg">
-  <dynamic-form-text [fg]="fg" [question]="question"
-                     (onChangeForm)="onChangeForm.emit($event)">
-  </dynamic-form-text>
+  <dynamic-form-text [fg]="fg" [question]="question"></dynamic-form-text>
 </ng-template>
 <ng-template [questTemplate]="['checkbox']" let-question let-fg="fg">
-  <dynamic-form-checkbox [fg]="fg" [question]="question"
-                         (onChangeForm)="onChangeForm.emit($event)">
-  </dynamic-form-checkbox>
+  <dynamic-form-checkbox [fg]="fg" [question]="question"></dynamic-form-checkbox>
 </ng-template>
 
 <ng-template [questTemplate]="['number']" let-question let-fg="fg">
-  <dynamic-form-number [fg]="fg" [question]="question"
-                       (onChangeForm)="onChangeForm.emit($event)">
-  </dynamic-form-number>
+  <dynamic-form-number [fg]="fg" [question]="question"></dynamic-form-number>
 </ng-template>
 <ng-template [questTemplate]="['range']" let-question let-fg="fg">
-  <dynamic-form-range [fg]="fg" [question]="question"
-                      (onChangeForm)="onChangeForm.emit($event)">
-  </dynamic-form-range>
+  <dynamic-form-range [fg]="fg" [question]="question"></dynamic-form-range>
 </ng-template>
 
 <ng-template [questTemplate]="['dropdown']" let-question let-fg="fg">
-  <dynamic-form-select [fg]="fg" [question]="question"
-                       (onChangeForm)="onChangeForm.emit($event)">
-  </dynamic-form-select>
+  <dynamic-form-select [fg]="fg" [question]="question"></dynamic-form-select>
 </ng-template>
-<ng-template [questTemplate]="['array']" let-question>
-  <span>{{question.label}}</span>
-  <button *ngIf="question.options?.canAdd" (click)="pushControl(question.options.control, question)">Добавить</button>
-  <ng-container *ngFor="let control of question['controls']">
+<ng-template [questTemplate]="['array']" let-formArray>
+  <span>{{formArray.label}}</span>
+  <button *ngIf="formArray?.options?.canAdd"
+          (click)="pushControl(formArray.options.control, formArray)">
+    Добавить
+  </button>
+  <ng-container *ngFor="let control of formArray['controls']">
     <ng-container
       *ngIf="control && templateList[control.controlType]; else errorTemplate"
       [ngTemplateOutlet]="templateList[control.controlType]"
@@ -67,5 +60,5 @@
   <p style="color: red">настройки не заданы или отсутствуют</p>
 </ng-template>
 <ng-template #errorTemplate>
-    <p style="color: red">Шаблона не существует</p>
+  <p style="color: red">Шаблона не существует</p>
 </ng-template>

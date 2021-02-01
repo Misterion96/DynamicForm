@@ -1,7 +1,6 @@
-import {Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, ChangeDetectionStrategy, Input} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {FormRange} from '../../classes/dynamic-form.classes';
-import {IFormChangeEvent} from '../../interfaces/dynamic-form.interface';
 
 @Component({
   selector: 'dynamic-form-range',
@@ -17,12 +16,10 @@ import {IFormChangeEvent} from '../../interfaces/dynamic-form.interface';
                      [id]="question.id"
                      [min]="question.options.min"
                      [max]="question.options.max"
-                     [formControlName]="question.key"
-                     (change)="onChangeForm.emit({type: question.controlType, key: question.key, value: question.value})"
+                     [formControl]="question"
               >
         <span class="form-control-range-maxValue">{{question.options.max}}</span>
       </span>
-
     </label>
     <error-message [showError]="question.invalid || (question.touched && question.invalid)"></error-message>
   `,
@@ -33,7 +30,6 @@ export class InputRangeComponent implements OnInit {
 
   @Input() fg: FormGroup;
   @Input() question: FormRange;
-  @Output() onChangeForm: EventEmitter<IFormChangeEvent> = new EventEmitter<IFormChangeEvent>();
 
   constructor() {
   }

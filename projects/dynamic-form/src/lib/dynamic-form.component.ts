@@ -15,7 +15,7 @@ import {
 } from '@angular/core';
 import { FormArray, FormGroup} from '@angular/forms';
 import {DynamicFormTemplateDirective} from './shared/dynamic-form-template.directive';
-import {IFormChangeEvent, TTemplateList} from './interfaces/dynamic-form.interface';
+import {TTemplateList} from './interfaces/dynamic-form.interface';
 import {DynamicFormService} from './shared/dynamic-form.service';
 import {DynamicFormArray, Question} from './classes/dynamic-form.classes';
 
@@ -37,7 +37,6 @@ export class DynamicFormComponent implements OnInit, AfterViewInit, AfterContent
   @Input() public submitName = 'Submit';
   @Input() public debug = false;
   @Output() readonly onSubmitForm: EventEmitter<FormGroup['value']> = new EventEmitter<FormGroup['value']>();
-  @Output() readonly onChangeForm: EventEmitter<IFormChangeEvent> = new EventEmitter<IFormChangeEvent>();
 
   public templateList: TTemplateList = {};
   @ContentChildren(DynamicFormTemplateDirective)

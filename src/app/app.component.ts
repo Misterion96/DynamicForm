@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {DynamicFormArray, FormCheckBox, FormColor, FormDropDown, FormNumber, FormText} from 'es-dynamic-form';
 import {FormRange} from '../../projects/dynamic-form/src/lib/classes/dynamic-form.classes';
-import { FormGroup} from '@angular/forms';
+import {FormGroup} from '@angular/forms';
 
 
 @Component({
@@ -32,12 +32,11 @@ export class AppComponent implements OnInit {
         new FormNumber({value: 2, key: 1, label: 'number 2'}),
         new FormNumber({value: 3, key: 2, label: 'number 3'}),
       ], key: 'arrayNumber', label: 'Числа', order: 111,
-      options: {
-        canAdd: true,
-        control: FormNumber
-      }
+      options: {canAdd: true, control: FormNumber}
     }),
-    color: new FormColor({value: '#fff222', key: 'color', label: 'colorpicker', disabled: false, order: 1}),
+    color: new FormColor({
+      value: '#fff222', key: 'color', label: 'colorpicker', disabled: false, order: 1
+    }),
     range: new FormRange({
       value: 10, key: 'range', label: 'my range', order: 10,
       options: {min: 0, max: 100, showValue: true}

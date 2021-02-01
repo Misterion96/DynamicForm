@@ -1,7 +1,6 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {ChangeDetectionStrategy, Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormGroup} from '@angular/forms';
 import {FormCheckBox} from '../../classes/dynamic-form.classes';
-import {IFormChangeEvent} from '../../interfaces/dynamic-form.interface';
 
 @Component({
   selector: 'dynamic-form-checkbox',
@@ -9,8 +8,8 @@ import {IFormChangeEvent} from '../../interfaces/dynamic-form.interface';
     <label [formGroup]="fg" [ngClass]="question.style" [attr.for]="question.id">
       <input type="checkbox"
              [id]="question.id"
-             [formControlName]="question.key"
-             (change)="onChangeForm.emit({type: question.controlType, key: question.key, value: question.value})"
+             [formControl]="question"
+             [ngClass]="question.errors ? 'form-control-invalid' : ''"
       >
       {{question.label}}
     </label>`,
@@ -20,7 +19,6 @@ import {IFormChangeEvent} from '../../interfaces/dynamic-form.interface';
 export class InputCheckboxComponent implements OnInit {
   @Input() fg: FormGroup;
   @Input() question: FormCheckBox;
-  @Output() onChangeForm: EventEmitter<IFormChangeEvent> = new EventEmitter<IFormChangeEvent>();
 
   constructor() {
   }
